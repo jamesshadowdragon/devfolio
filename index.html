@@ -3,9 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Devfolio Docs</title>
-  <meta name="description" content="Documentation for Devfolio — a modern, minimal developer portfolio builder.">
+
+  <title>Devfolio — Documentation</title>
+  <meta
+    name="description"
+    content="Documentation for Devfolio, a modern portfolio platform for Roblox developers and creators."
+  >
+
   <style>
+    /* =========================================================
+       RESET
+    ========================================================= */
+
     * {
       margin: 0;
       padding: 0;
@@ -14,16 +23,26 @@
 
     :root {
       --bg: #050505;
-      --surface: #0a0a0a;
-      --surface-2: #0e0e0e;
-      --surface-3: #121212;
-      --border: #1c1c1c;
-      --border-light: #252525;
+      --bg-soft: #080808;
+      --panel: #0a0a0a;
+      --panel-hover: #0e0e0e;
+
+      --border: rgba(255, 255, 255, 0.08);
+      --border-soft: rgba(255, 255, 255, 0.055);
+
       --text: #f5f5f5;
-      --muted: #888;
-      --muted-2: #626262;
-      --code: #0b0b0b;
+      --text-soft: #b4b4b4;
+      --muted: #777;
+      --muted-dark: #4b4b4b;
+
       --white: #fff;
+
+      --sidebar-width: 245px;
+      --toc-width: 170px;
+      --content-width: 760px;
+      --page-width: 1240px;
+
+      --header-height: 64px;
     }
 
     html {
@@ -32,11 +51,61 @@
     }
 
     body {
-      background: var(--bg);
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 50% -15%,
+          rgba(255,255,255,.055),
+          transparent 35%
+        ),
+        var(--bg);
+
       color: var(--text);
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
       line-height: 1.7;
       overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: .35;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.018) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.018) 1px,
+          transparent 1px
+        );
+
+      background-size: 80px 80px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 60%
+        );
+    }
+
+    ::selection {
+      background: white;
+      color: black;
     }
 
     a {
@@ -48,340 +117,694 @@
       font: inherit;
     }
 
-    code, pre {
-      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    code,
+    pre {
+      font-family:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
     }
 
-    nav {
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
+    .header {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 68px;
-      z-index: 100;
-      background: rgba(5, 5, 5, .82);
-      border-bottom: 1px solid rgba(255,255,255,.07);
-      backdrop-filter: blur(18px);
+      inset: 0 0 auto 0;
+      height: var(--header-height);
+      z-index: 1000;
+
+      border-bottom: 1px solid var(--border);
+
+      background: rgba(5,5,5,.78);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
-    .nav-inner {
-      width: min(1280px, calc(100% - 40px));
+    .header-inner {
+      width: min(
+        calc(100% - 48px),
+        1280px
+      );
+
       height: 100%;
       margin: auto;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
 
-    .logo {
-      font-size: 17px;
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      font-size: 15px;
       font-weight: 750;
       letter-spacing: -.5px;
     }
 
-    .logo span {
+    .brand-mark {
+      width: 26px;
+      height: 26px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 7px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #202020,
+          #0a0a0a
+        );
+
+      font-size: 11px;
+      font-weight: 800;
+
+      box-shadow:
+        inset 0 1px rgba(255,255,255,.08),
+        0 4px 20px rgba(0,0,0,.3);
+    }
+
+    .brand span {
       color: #777;
     }
 
-    .nav-right {
+    .header-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
 
-    .nav-link {
-      color: #888;
-      font-size: 13px;
-      padding: 8px 12px;
+    .header-link {
+      height: 34px;
+      padding: 0 12px;
+
+      display: inline-flex;
+      align-items: center;
+
+      color: #858585;
+      font-size: 12px;
+
       border-radius: 7px;
-      transition: .2s;
+
+      transition:
+        color .2s ease,
+        background .2s ease;
     }
 
-    .nav-link:hover {
+    .header-link:hover {
       color: white;
-      background: #111;
+      background: rgba(255,255,255,.055);
     }
 
-    .github {
-      border: 1px solid #282828;
-      background: #101010;
-      color: white;
-      padding: 8px 13px;
-      border-radius: 7px;
-      font-size: 13px;
-      transition: .2s;
+    .github-button {
+      height: 35px;
+      padding: 0 13px;
+
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      color: #ddd;
+      font-size: 12px;
+      font-weight: 600;
+
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 8px;
+
+      background: #0d0d0d;
+
+      box-shadow:
+        inset 0 1px rgba(255,255,255,.035);
+
+      transition: .2s ease;
     }
 
-    .github:hover {
+    .github-button:hover {
+      color: #050505;
       background: white;
-      color: black;
       border-color: white;
+      transform: translateY(-1px);
     }
 
-    .layout {
-      width: min(1280px, calc(100% - 40px));
-      margin: 0 auto;
+
+    /* =========================================================
+       PAGE LAYOUT
+    ========================================================= */
+
+    .page {
+      width: min(
+        calc(100% - 48px),
+        var(--page-width)
+      );
+
+      margin: auto;
+
       display: grid;
-      grid-template-columns: 220px minmax(0, 760px) 180px;
-      gap: 60px;
-      padding-top: 68px;
+      grid-template-columns:
+        var(--sidebar-width)
+        minmax(0, var(--content-width))
+        var(--toc-width);
+
+      gap: 52px;
+
+      padding-top: var(--header-height);
     }
+
+
+    /* =========================================================
+       SIDEBAR
+    ========================================================= */
 
     .sidebar {
       position: sticky;
-      top: 68px;
-      height: calc(100vh - 68px);
-      padding: 40px 0;
+      top: var(--header-height);
+
+      height: calc(100vh - var(--header-height));
+
+      padding: 38px 0 50px;
+
       overflow-y: auto;
+      scrollbar-width: none;
     }
 
-    .sidebar-title {
-      color: #444;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1.8px;
-      text-transform: uppercase;
-      margin-bottom: 14px;
+    .sidebar::-webkit-scrollbar {
+      display: none;
     }
 
     .sidebar-group {
-      margin-bottom: 27px;
+      margin-bottom: 30px;
     }
 
-    .sidebar a {
-      display: block;
-      color: #777;
-      font-size: 13px;
-      padding: 5px 0;
-      transition: .2s;
+    .sidebar-heading {
+      margin-bottom: 9px;
+
+      color: #494949;
+
+      font-size: 9px;
+      font-weight: 750;
+
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
     }
 
-    .sidebar a:hover,
-    .sidebar a.active {
+    .sidebar-link {
+      position: relative;
+
+      display: flex;
+      align-items: center;
+
+      width: 100%;
+      min-height: 32px;
+
+      padding: 0 11px;
+
+      color: #737373;
+      font-size: 12px;
+
+      border-radius: 6px;
+
+      transition:
+        color .18s ease,
+        background .18s ease;
+    }
+
+    .sidebar-link:hover {
+      color: #ddd;
+      background: rgba(255,255,255,.035);
+    }
+
+    .sidebar-link.active {
       color: white;
+      background: rgba(255,255,255,.065);
     }
+
+    .sidebar-link.active::before {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      top: 8px;
+      bottom: 8px;
+
+      width: 2px;
+
+      background: white;
+      border-radius: 4px;
+    }
+
+
+    /* =========================================================
+       MAIN
+    ========================================================= */
 
     main {
       min-width: 0;
-      padding: 72px 0 120px;
+      padding: 78px 0 130px;
+    }
+
+    .hero {
+      padding-bottom: 70px;
     }
 
     .eyebrow {
-      color: #666;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      font-size: 10px;
-      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
       margin-bottom: 17px;
+
+      color: #666;
+
+      font-size: 9px;
+      font-weight: 750;
+
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    .eyebrow::before {
+      content: "";
+
+      width: 18px;
+      height: 1px;
+
+      background: #444;
     }
 
     .hero h1 {
-      font-size: clamp(45px, 6vw, 68px);
+      max-width: 760px;
+
+      font-size:
+        clamp(44px, 5.4vw, 68px);
+
       line-height: .98;
+
       letter-spacing: -4px;
-      margin-bottom: 22px;
+
+      font-weight: 750;
+
+      margin-bottom: 25px;
     }
 
-    .hero h1 span {
-      color: #666;
+    .hero h1 .dim {
+      color: #555;
     }
 
     .hero-description {
-      max-width: 650px;
+      max-width: 670px;
+
       color: #858585;
-      font-size: 17px;
-      line-height: 1.8;
-      margin-bottom: 30px;
+
+      font-size: 16px;
+      line-height: 1.85;
+
+      margin-bottom: 28px;
     }
 
     .hero-actions {
       display: flex;
-      gap: 10px;
+      align-items: center;
+      gap: 9px;
+
       flex-wrap: wrap;
     }
 
-    .btn {
+    .button {
+      height: 39px;
+
       display: inline-flex;
       align-items: center;
-      gap: 7px;
-      padding: 10px 15px;
+      gap: 8px;
+
+      padding: 0 14px;
+
       border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      border: 1px solid #292929;
-      transition: .2s;
+
+      font-size: 12px;
+      font-weight: 650;
+
+      border: 1px solid var(--border);
+
+      transition: .2s ease;
     }
 
-    .btn-primary {
-      color: black;
+    .button-primary {
+      color: #050505;
       background: white;
       border-color: white;
+
+      box-shadow:
+        0 8px 25px rgba(0,0,0,.25);
     }
 
-    .btn-primary:hover {
+    .button-primary:hover {
       background: #ddd;
+      transform: translateY(-1px);
     }
 
-    .btn-secondary {
-      background: #0d0d0d;
-      color: #ddd;
+    .button-secondary {
+      color: #bbb;
+      background: #0b0b0b;
     }
 
-    .btn-secondary:hover {
-      background: #151515;
+    .button-secondary:hover {
+      color: white;
+      background: #111;
+      border-color: rgba(255,255,255,.15);
     }
+
+
+    /* =========================================================
+       SECTIONS
+    ========================================================= */
 
     .doc-section {
-      padding-top: 90px;
-      border-top: 1px solid #151515;
-      margin-top: 90px;
+      position: relative;
+
+      padding-top: 68px;
+      margin-top: 68px;
+
+      border-top: 1px solid var(--border-soft);
     }
 
     .doc-section:first-of-type {
-      margin-top: 80px;
+      margin-top: 0;
     }
 
     h2 {
-      font-size: 32px;
-      letter-spacing: -1.5px;
-      line-height: 1.1;
+      font-size: 29px;
+      line-height: 1.15;
+
+      letter-spacing: -1.4px;
+
       margin-bottom: 15px;
     }
 
     h3 {
-      font-size: 19px;
-      letter-spacing: -.4px;
-      margin: 35px 0 10px;
+      margin-top: 32px;
+      margin-bottom: 9px;
+
+      font-size: 16px;
+      line-height: 1.4;
+
+      letter-spacing: -.35px;
     }
 
     p {
       color: #858585;
-      font-size: 14px;
-      line-height: 1.8;
-      margin-bottom: 17px;
+
+      font-size: 13px;
+      line-height: 1.85;
+
+      margin-bottom: 16px;
     }
 
     strong {
       color: #ddd;
+      font-weight: 600;
     }
+
+
+    /* =========================================================
+       CARDS
+    ========================================================= */
 
     .cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 28px;
+
+      gap: 10px;
+
+      margin-top: 25px;
     }
 
     .card {
-      background: var(--surface);
+      position: relative;
+
+      min-height: 150px;
+
+      padding: 19px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.025),
+          rgba(255,255,255,.008)
+        );
+
       border: 1px solid var(--border);
-      border-radius: 11px;
-      padding: 23px;
+      border-radius: 10px;
+
+      transition:
+        border-color .2s ease,
+        background .2s ease,
+        transform .2s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(255,255,255,.13);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.045),
+          rgba(255,255,255,.012)
+        );
+
+      transform: translateY(-2px);
     }
 
     .card-number {
+      margin-bottom: 25px;
+
       color: #444;
+
       font-family: monospace;
-      font-size: 11px;
-      margin-bottom: 24px;
+      font-size: 10px;
     }
 
     .card h3 {
-      margin: 0 0 7px;
-      font-size: 16px;
+      margin: 0 0 6px;
+
+      font-size: 14px;
+      font-weight: 650;
     }
 
     .card p {
       margin: 0;
-      font-size: 13px;
-      color: #707070;
-    }
 
-    .code-wrap {
-      position: relative;
-      margin: 22px 0;
-    }
-
-    pre {
-      background: var(--code);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-      overflow-x: auto;
-      color: #bdbdbd;
+      color: #6d6d6d;
       font-size: 12px;
-      line-height: 1.75;
+      line-height: 1.7;
     }
 
-    .copy {
-      position: absolute;
-      top: 9px;
-      right: 9px;
-      border: 1px solid #282828;
-      background: #111;
-      color: #777;
-      border-radius: 6px;
-      padding: 5px 8px;
-      font-size: 10px;
-      cursor: pointer;
-    }
 
-    .copy:hover {
-      color: white;
-      background: #181818;
-    }
-
-    .inline-code {
-      background: #111;
-      border: 1px solid #222;
-      border-radius: 5px;
-      padding: 2px 6px;
-      color: #bbb;
-      font-size: 12px;
-    }
+    /* =========================================================
+       CALLOUT
+    ========================================================= */
 
     .callout {
-      border: 1px solid #242424;
-      background: #0b0b0b;
-      border-radius: 10px;
-      padding: 18px 20px;
-      margin: 22px 0;
+      position: relative;
+
+      margin: 23px 0;
+
+      padding: 17px 18px 17px 19px;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.035),
+          rgba(255,255,255,.012)
+        );
+
+      overflow: hidden;
+    }
+
+    .callout::before {
+      content: "";
+
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+
+      width: 2px;
+
+      background: #777;
     }
 
     .callout-title {
+      margin-bottom: 3px;
+
       color: #ddd;
-      font-size: 13px;
+
+      font-size: 12px;
       font-weight: 650;
-      margin-bottom: 5px;
     }
 
     .callout p {
       margin: 0;
-      font-size: 13px;
+
+      font-size: 12px;
+      line-height: 1.7;
     }
+
+
+    /* =========================================================
+       CODE
+    ========================================================= */
+
+    .code-wrap {
+      position: relative;
+
+      margin: 18px 0;
+    }
+
+    pre {
+      position: relative;
+
+      padding: 18px 20px;
+
+      color: #aaa;
+
+      font-size: 11.5px;
+      line-height: 1.75;
+
+      overflow-x: auto;
+
+      background: #080808;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
+
+      box-shadow:
+        inset 0 1px rgba(255,255,255,.02);
+    }
+
+    pre::before {
+      content: "";
+
+      position: absolute;
+      top: 12px;
+      left: 13px;
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #333;
+
+      box-shadow:
+        10px 0 #2b2b2b,
+        20px 0 #242424;
+    }
+
+    pre code {
+      display: block;
+      padding-top: 10px;
+    }
+
+    .copy {
+      position: absolute;
+
+      top: 9px;
+      right: 9px;
+
+      z-index: 2;
+
+      height: 27px;
+
+      padding: 0 9px;
+
+      color: #777;
+
+      font-size: 10px;
+
+      background: #101010;
+
+      border: 1px solid #242424;
+      border-radius: 6px;
+
+      cursor: pointer;
+
+      transition: .2s;
+    }
+
+    .copy:hover {
+      color: white;
+      background: #171717;
+      border-color: #333;
+    }
+
+    .inline-code {
+      display: inline-block;
+
+      padding: 1px 5px;
+
+      color: #aaa;
+
+      font-family: monospace;
+      font-size: 11px;
+
+      background: #111;
+
+      border: 1px solid #222;
+      border-radius: 4px;
+    }
+
+
+    /* =========================================================
+       TABLE
+    ========================================================= */
 
     .table-wrap {
       overflow-x: auto;
+
+      margin: 22px 0;
+
       border: 1px solid var(--border);
-      border-radius: 10px;
-      margin: 24px 0;
+      border-radius: 9px;
+
+      background: #080808;
     }
 
     table {
       width: 100%;
+
       border-collapse: collapse;
-      font-size: 13px;
+
+      font-size: 12px;
     }
 
-    th, td {
-      padding: 13px 15px;
-      border-bottom: 1px solid var(--border);
+    th,
+    td {
+      padding: 12px 14px;
+
       text-align: left;
+
+      border-bottom: 1px solid var(--border-soft);
     }
 
     th {
       color: #aaa;
+
       background: #0c0c0c;
+
+      font-size: 11px;
       font-weight: 600;
     }
 
@@ -389,71 +812,134 @@
       color: #777;
     }
 
+    td:first-child {
+      color: #aaa;
+      font-family: monospace;
+      font-size: 11px;
+    }
+
     tr:last-child td {
       border-bottom: none;
     }
 
+    tbody tr:hover td {
+      background: rgba(255,255,255,.018);
+    }
+
+
+    /* =========================================================
+       FILE TREE
+    ========================================================= */
+
     .tree {
       margin-top: 20px;
-      background: #090909;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 22px;
-      color: #888;
-      font-family: monospace;
-      font-size: 12px;
-      line-height: 1.9;
+
+      padding: 19px 21px;
+
       overflow-x: auto;
+
+      color: #666;
+
+      font-family: monospace;
+      font-size: 11px;
+      line-height: 1.85;
+
+      background: #080808;
+
+      border: 1px solid var(--border);
+      border-radius: 9px;
     }
 
     .folder {
-      color: #ddd;
+      color: #bbb;
     }
 
     .file {
-      color: #777;
+      color: #666;
     }
+
+
+    /* =========================================================
+       RIGHT TOC
+    ========================================================= */
 
     .toc {
       position: sticky;
       top: 105px;
+
       height: fit-content;
-      padding-top: 45px;
+
+      padding-top: 53px;
     }
 
     .toc-title {
-      color: #444;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
+      margin-bottom: 12px;
+
+      color: #414141;
+
       font-size: 9px;
-      font-weight: 700;
-      margin-bottom: 13px;
+      font-weight: 750;
+
+      letter-spacing: 1.7px;
+      text-transform: uppercase;
     }
 
     .toc a {
       display: block;
+
+      padding: 3px 0;
+
       color: #555;
-      font-size: 11px;
-      padding: 4px 0;
-      transition: .2s;
+
+      font-size: 10.5px;
+
+      transition: color .2s ease;
     }
 
     .toc a:hover {
       color: #aaa;
     }
 
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
     footer {
-      border-top: 1px solid #151515;
-      padding: 30px 0;
-      color: #555;
-      font-size: 11px;
-      text-align: center;
+      width: min(
+        calc(100% - 48px),
+        var(--page-width)
+      );
+
+      margin: auto;
+
+      padding: 25px 0 35px;
+
+      color: #444;
+
+      font-size: 10px;
+
+      border-top: 1px solid var(--border-soft);
     }
 
-    @media (max-width: 1050px) {
-      .layout {
-        grid-template-columns: 190px minmax(0, 1fr);
-        gap: 45px;
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 1100px) {
+      .page {
+        grid-template-columns:
+          210px
+          minmax(0, 1fr);
+
+        gap: 42px;
       }
 
       .toc {
@@ -461,240 +947,648 @@
       }
     }
 
-    @media (max-width: 750px) {
-      .nav-link {
+    @media (max-width: 760px) {
+      :root {
+        --header-height: 60px;
+      }
+
+      .header-inner {
+        width: calc(100% - 28px);
+      }
+
+      .header-link {
         display: none;
       }
 
-      .layout {
+      .page {
+        width: min(
+          calc(100% - 30px),
+          720px
+        );
+
         display: block;
-        width: min(100% - 30px, 760px);
       }
 
       .sidebar {
         position: static;
+
         height: auto;
-        border-bottom: 1px solid #151515;
-        padding: 25px 0;
+
+        padding: 22px 0 18px;
+
+        border-bottom: 1px solid var(--border-soft);
       }
 
       .sidebar-group {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 12px;
-        margin-bottom: 15px;
+        margin-bottom: 17px;
       }
 
-      .sidebar-title {
-        width: 100%;
+      .sidebar-heading {
+        margin-bottom: 6px;
       }
 
-      .sidebar a {
-        padding: 0;
+      .sidebar-link {
+        display: inline-flex;
+
+        width: auto;
+
+        min-height: 28px;
+
+        margin-right: 3px;
+
+        padding: 0 8px;
+      }
+
+      .sidebar-link.active::before {
+        display: none;
       }
 
       main {
-        padding-top: 50px;
+        padding-top: 52px;
+      }
+
+      .hero {
+        padding-bottom: 45px;
+      }
+
+      .hero h1 {
+        font-size: clamp(42px, 12vw, 62px);
+        letter-spacing: -3px;
+      }
+
+      .hero-description {
+        font-size: 14px;
       }
 
       .cards {
         grid-template-columns: 1fr;
       }
 
-      .hero h1 {
-        letter-spacing: -2.5px;
+      .doc-section {
+        padding-top: 52px;
+        margin-top: 52px;
+      }
+
+      footer {
+        width: calc(100% - 30px);
       }
     }
 
-    @media (max-width: 450px) {
-      .nav-inner {
-        width: calc(100% - 28px);
+    @media (max-width: 440px) {
+      .github-button {
+        padding: 0 9px;
       }
 
-      .github {
-        padding: 7px 10px;
+      .brand-mark {
+        width: 24px;
+        height: 24px;
       }
 
       h2 {
-        font-size: 28px;
+        font-size: 26px;
       }
 
-      .doc-section {
-        padding-top: 65px;
-        margin-top: 65px;
+      .hero h1 {
+        letter-spacing: -2.5px;
+      }
+
+      pre {
+        font-size: 10.5px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
       }
     }
   </style>
 </head>
+
 <body>
 
-  <nav>
-    <div class="nav-inner">
-      <a href="#top" class="logo">Dev<span>folio</span></a>
-      <div class="nav-right">
-        <a class="nav-link" href="#getting-started">Documentation</a>
-        <a class="github" href="https://github.com/logicnestxvoidlure/devfolio" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
-      </div>
-    </div>
-  </nav>
+  <!-- =======================================================
+       HEADER
+  ======================================================== -->
 
-  <div class="layout">
+  <header class="header">
+    <div class="header-inner">
+
+      <a href="#top" class="brand">
+        <span class="brand-mark">D</span>
+        Dev<span>folio</span>
+      </a>
+
+      <div class="header-right">
+        <a href="#introduction" class="header-link">
+          Documentation
+        </a>
+
+        <a
+          href="https://github.com/logicnestxvoidlure/devfolio"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="github-button"
+        >
+          GitHub
+          <span>↗</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =======================================================
+       PAGE
+  ======================================================== -->
+
+  <div class="page">
+
+    <!-- SIDEBAR -->
+
     <aside class="sidebar">
+
       <div class="sidebar-group">
-        <div class="sidebar-title">Getting started</div>
-        <a href="#introduction">Introduction</a>
-        <a href="#getting-started">Installation</a>
-        <a href="#development">Development</a>
+        <div class="sidebar-heading">
+          Getting started
+        </div>
+
+        <a href="#introduction" class="sidebar-link active">
+          Introduction
+        </a>
+
+        <a href="#getting-started" class="sidebar-link">
+          Installation
+        </a>
+
+        <a href="#development" class="sidebar-link">
+          Development
+        </a>
       </div>
+
+
       <div class="sidebar-group">
-        <div class="sidebar-title">Using Devfolio</div>
-        <a href="#portfolio-data">Portfolio data</a>
-        <a href="#projects">Projects</a>
-        <a href="#routes">Routes</a>
+        <div class="sidebar-heading">
+          Using Devfolio
+        </div>
+
+        <a href="#portfolio-data" class="sidebar-link">
+          Portfolio data
+        </a>
+
+        <a href="#projects" class="sidebar-link">
+          Projects
+        </a>
+
+        <a href="#routes" class="sidebar-link">
+          Routes
+        </a>
       </div>
+
+
       <div class="sidebar-group">
-        <div class="sidebar-title">Customization</div>
-        <a href="#styling">Styling</a>
-        <a href="#components">Components</a>
-        <a href="#structure">Project structure</a>
+        <div class="sidebar-heading">
+          Customization
+        </div>
+
+        <a href="#styling" class="sidebar-link">
+          Styling
+        </a>
+
+        <a href="#components" class="sidebar-link">
+          Components
+        </a>
+
+        <a href="#structure" class="sidebar-link">
+          Project structure
+        </a>
       </div>
+
+
       <div class="sidebar-group">
-        <div class="sidebar-title">Deployment</div>
-        <a href="#deployment">Deployment</a>
-        <a href="#environment">Environment</a>
+        <div class="sidebar-heading">
+          Deployment
+        </div>
+
+        <a href="#deployment" class="sidebar-link">
+          Deployment
+        </a>
+
+        <a href="#environment" class="sidebar-link">
+          Environment
+        </a>
       </div>
+
+
       <div class="sidebar-group">
-        <div class="sidebar-title">Community</div>
-        <a href="#roadmap">Roadmap</a>
-        <a href="#contributing">Contributing</a>
-        <a href="#license">License</a>
+        <div class="sidebar-heading">
+          Community
+        </div>
+
+        <a href="#roadmap" class="sidebar-link">
+          Roadmap
+        </a>
+
+        <a href="#contributing" class="sidebar-link">
+          Contributing
+        </a>
+
+        <a href="#license" class="sidebar-link">
+          License
+        </a>
       </div>
+
     </aside>
 
+
+    <!-- MAIN CONTENT -->
+
     <main id="top">
-      <div class="hero">
-        <div class="eyebrow">Devfolio documentation</div>
-        <h1>Build your portfolio.<br><span>Make it yours.</span></h1>
-        <p class="hero-description">Devfolio is a modern, minimal portfolio starter built for Roblox developers, creators, scripters, builders, UI designers, and developers.</p>
-        <div class="hero-actions">
-          <a href="#getting-started" class="btn btn-primary">Get started →</a>
-          <a href="https://github.com/logicnestxvoidlure/devfolio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View source ↗</a>
+
+      <!-- HERO -->
+
+      <section class="hero">
+
+        <div class="eyebrow">
+          Devfolio documentation
         </div>
-      </div>
+
+        <h1>
+          Build your portfolio.<br>
+          <span class="dim">Make it yours.</span>
+        </h1>
+
+        <p class="hero-description">
+          Devfolio is a modern portfolio platform built for
+          Roblox developers, creators, scripters, builders,
+          UI designers, and developers.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            href="#getting-started"
+            class="button button-primary"
+          >
+            Get started
+            <span>→</span>
+          </a>
+
+          <a
+            href="https://github.com/logicnestxvoidlure/devfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button-secondary"
+          >
+            View source
+            <span>↗</span>
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- INTRODUCTION -->
 
       <section class="doc-section" id="introduction">
-        <div class="eyebrow">Overview</div>
-        <h2>Introduction</h2>
-        <p>Devfolio is a lightweight developer portfolio project designed to be forked, customized, and deployed.</p>
-        <p>It provides a clean foundation for showcasing your profile, projects, skills, social links, and other developer information without starting from scratch.</p>
-        <div class="callout">
-          <div class="callout-title">What Devfolio is</div>
-          <p>A customizable portfolio starter that you can turn into your own personal website or expand into a complete portfolio platform.</p>
+
+        <div class="eyebrow">
+          Overview
         </div>
+
+        <h2>
+          Introduction
+        </h2>
+
+        <p>
+          Devfolio is a lightweight developer portfolio
+          platform designed to make creating and publishing
+          a personal portfolio simple.
+        </p>
+
+        <p>
+          Showcase your profile, projects, skills, social
+          links, experience, and other developer information
+          without building everything from scratch.
+        </p>
+
+        <div class="callout">
+
+          <div class="callout-title">
+            What is Devfolio?
+          </div>
+
+          <p>
+            A customizable portfolio foundation that can
+            grow from a simple personal site into a complete
+            portfolio platform.
+          </p>
+
+        </div>
+
+
         <div class="cards">
+
           <div class="card">
             <div class="card-number">01</div>
-            <h3>Minimal</h3>
-            <p>A dark, developer-focused interface with a clean visual system.</p>
+
+            <h3>
+              Minimal
+            </h3>
+
+            <p>
+              A clean interface focused on your work rather
+              than unnecessary visual noise.
+            </p>
           </div>
+
+
           <div class="card">
             <div class="card-number">02</div>
-            <h3>Responsive</h3>
-            <p>Designed to work across desktop, tablet, and mobile screens.</p>
+
+            <h3>
+              Responsive
+            </h3>
+
+            <p>
+              Designed to work across desktop, tablet,
+              and mobile devices.
+            </p>
           </div>
+
+
           <div class="card">
             <div class="card-number">03</div>
-            <h3>Customizable</h3>
-            <p>Modify the data, components, styling, and structure to fit your needs.</p>
+
+            <h3>
+              Customizable
+            </h3>
+
+            <p>
+              Change your content, components, styling,
+              layout, and branding.
+            </p>
           </div>
+
+
           <div class="card">
             <div class="card-number">04</div>
-            <h3>Open source</h3>
-            <p>Fork the repository and build your own version on top of the existing foundation.</p>
+
+            <h3>
+              Open source
+            </h3>
+
+            <p>
+              Fork the project and create your own version
+              on top of the existing foundation.
+            </p>
           </div>
+
         </div>
+
       </section>
+
+
+      <!-- GETTING STARTED -->
 
       <section class="doc-section" id="getting-started">
-        <div class="eyebrow">Installation</div>
-        <h2>Getting started</h2>
-        <p>Get Devfolio running locally in a few steps.</p>
-        <h3>Requirements</h3>
-        <p>Before starting, make sure you have Node.js 18.18+ installed, along with npm and Git.</p>
-        <h3>Clone the repository</h3>
+
+        <div class="eyebrow">
+          Installation
+        </div>
+
+        <h2>
+          Getting started
+        </h2>
+
+        <p>
+          Get Devfolio running locally in just a few steps.
+        </p>
+
+        <h3>
+          Requirements
+        </h3>
+
+        <p>
+          Make sure you have Node.js 18.18 or newer,
+          npm, and Git installed.
+        </p>
+
+
+        <h3>
+          Clone the repository
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>git clone https://github.com/logicnestxvoidlure/devfolio.git
 cd devfolio</code></pre>
+
         </div>
-        <h3>Install dependencies</h3>
+
+
+        <h3>
+          Install dependencies
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>npm install</code></pre>
+
         </div>
-        <h3>Start the development server</h3>
+
+
+        <h3>
+          Start the development server
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>npm run dev</code></pre>
+
         </div>
-        <p>Once the server starts, open <span class="inline-code">http://localhost:3000</span> in your browser.</p>
+
+        <p>
+          Open
+          <span class="inline-code">
+            http://localhost:3000
+          </span>
+          once the development server has started.
+        </p>
+
       </section>
+
+
+      <!-- DEVELOPMENT -->
 
       <section class="doc-section" id="development">
-        <div class="eyebrow">Development</div>
-        <h2>Development workflow</h2>
-        <p>Devfolio uses Next.js with TypeScript and Tailwind CSS. The project uses the Next.js App Router.</p>
-        <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
-          <pre><code>npm run dev</code></pre>
+
+        <div class="eyebrow">
+          Development
         </div>
-        <p>Make your changes inside the application, save the file, and Next.js will update the development server automatically.</p>
+
+        <h2>
+          Development workflow
+        </h2>
+
+        <p>
+          Devfolio uses Next.js with TypeScript and Tailwind
+          CSS and follows the Next.js App Router architecture.
+        </p>
+
+        <div class="code-wrap">
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
+          <pre><code>npm run dev</code></pre>
+
+        </div>
+
+        <p>
+          Changes made inside the application are reflected
+          automatically by the development server.
+        </p>
+
       </section>
 
+
+      <!-- PORTFOLIO DATA -->
+
       <section class="doc-section" id="portfolio-data">
-        <div class="eyebrow">Configuration</div>
-        <h2>Portfolio data</h2>
-        <p>The starter portfolio currently uses demo data stored inside <span class="inline-code">lib/demo-data.ts</span>.</p>
-        <p>This is the main place to customize the example portfolio before connecting the project to a database.</p>
-        <h3>Available information</h3>
-        <div class="cards">
-          <div class="card">
-            <h3>Profile</h3>
-            <p>Display name, username, headline, bio, avatar, and location.</p>
-          </div>
-          <div class="card">
-            <h3>Skills</h3>
-            <p>Technologies, tools, and skills displayed on the portfolio.</p>
-          </div>
-          <div class="card">
-            <h3>Socials</h3>
-            <p>Links to platforms such as Roblox, Discord, and GitHub.</p>
-          </div>
-          <div class="card">
-            <h3>Projects</h3>
-            <p>Project titles, descriptions, roles, images, tags, links, and featured status.</p>
-          </div>
+
+        <div class="eyebrow">
+          Configuration
         </div>
-        <h3>Example</h3>
+
+        <h2>
+          Portfolio data
+        </h2>
+
+        <p>
+          The starter portfolio currently uses demo data
+          stored inside
+          <span class="inline-code">
+            lib/demo-data.ts
+          </span>.
+        </p>
+
+        <p>
+          This is the primary place to customize the example
+          portfolio before connecting Devfolio to a database.
+        </p>
+
+
+        <h3>
+          Available information
+        </h3>
+
+
+        <div class="cards">
+
+          <div class="card">
+
+            <h3>
+              Profile
+            </h3>
+
+            <p>
+              Display name, username, headline, bio,
+              avatar, and location.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              Skills
+            </h3>
+
+            <p>
+              Technologies, tools, and skills displayed
+              throughout the portfolio.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              Socials
+            </h3>
+
+            <p>
+              Links to platforms such as Roblox,
+              Discord, and GitHub.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              Projects
+            </h3>
+
+            <p>
+              Titles, descriptions, roles, images,
+              tags, links, and featured status.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <h3>
+          Example
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>export const demoPortfolio: Portfolio = {
   username: "yourusername",
   displayName: "Your Name",
   headline: "Roblox Developer",
   bio: "I create Roblox experiences and systems.",
   avatar: "YOUR_AVATAR_URL",
+
   skills: [
     "Luau",
     "Roblox Studio",
     "UI/UX",
     "Building"
   ],
+
   socials: {
     roblox: "YOUR_ROBLOX_URL",
     discord: "YOUR_DISCORD_URL",
     github: "YOUR_GITHUB_URL"
   },
+
   projects: [
     {
       id: "1",
@@ -708,98 +1602,301 @@ cd devfolio</code></pre>
     }
   ]
 };</code></pre>
+
         </div>
+
       </section>
 
+
+      <!-- PROJECTS -->
+
       <section class="doc-section" id="projects">
-        <div class="eyebrow">Content</div>
-        <h2>Projects</h2>
-        <p>Projects are part of the portfolio data structure. Each project can contain information used by the project card component.</p>
+
+        <div class="eyebrow">
+          Content
+        </div>
+
+        <h2>
+          Projects
+        </h2>
+
+        <p>
+          Projects are part of the portfolio data structure.
+          Each project contains information used by the
+          project card component.
+        </p>
+
+
         <div class="table-wrap">
+
           <table>
+
             <thead>
               <tr>
                 <th>Property</th>
                 <th>Description</th>
               </tr>
             </thead>
+
             <tbody>
-              <tr><td>id</td><td>Unique identifier for the project.</td></tr>
-              <tr><td>title</td><td>Name displayed for the project.</td></tr>
-              <tr><td>description</td><td>Short explanation of the project.</td></tr>
-              <tr><td>role</td><td>Your role on the project.</td></tr>
-              <tr><td>image</td><td>Project preview image.</td></tr>
-              <tr><td>tags</td><td>Technologies or categories.</td></tr>
-              <tr><td>link</td><td>External project URL.</td></tr>
-              <tr><td>featured</td><td>Whether the project is featured.</td></tr>
+              <tr>
+                <td>id</td>
+                <td>Unique identifier for the project.</td>
+              </tr>
+
+              <tr>
+                <td>title</td>
+                <td>Name displayed for the project.</td>
+              </tr>
+
+              <tr>
+                <td>description</td>
+                <td>Short explanation of the project.</td>
+              </tr>
+
+              <tr>
+                <td>role</td>
+                <td>Your role on the project.</td>
+              </tr>
+
+              <tr>
+                <td>image</td>
+                <td>Project preview image.</td>
+              </tr>
+
+              <tr>
+                <td>tags</td>
+                <td>Technologies or categories.</td>
+              </tr>
+
+              <tr>
+                <td>link</td>
+                <td>External project URL.</td>
+              </tr>
+
+              <tr>
+                <td>featured</td>
+                <td>Whether the project is featured.</td>
+              </tr>
             </tbody>
+
           </table>
+
         </div>
+
       </section>
 
+
+      <!-- ROUTES -->
+
       <section class="doc-section" id="routes">
-        <div class="eyebrow">Navigation</div>
-        <h2>Routes</h2>
-        <p>Devfolio currently includes three main application routes.</p>
+
+        <div class="eyebrow">
+          Navigation
+        </div>
+
+        <h2>
+          Routes
+        </h2>
+
+        <p>
+          Devfolio currently includes three primary
+          application routes.
+        </p>
+
+
         <div class="table-wrap">
+
           <table>
+
             <thead>
               <tr>
                 <th>Route</th>
                 <th>Purpose</th>
               </tr>
             </thead>
+
             <tbody>
-              <tr><td>/</td><td>Demo public portfolio.</td></tr>
-              <tr><td>/dashboard</td><td>Starter portfolio editor.</td></tr>
-              <tr><td>/u/[username]</td><td>Public username-based portfolio.</td></tr>
+
+              <tr>
+                <td>/</td>
+                <td>Demo public portfolio.</td>
+              </tr>
+
+              <tr>
+                <td>/dashboard</td>
+                <td>Starter portfolio editor.</td>
+              </tr>
+
+              <tr>
+                <td>/u/[username]</td>
+                <td>Public username-based portfolio.</td>
+              </tr>
+
             </tbody>
+
           </table>
+
         </div>
-        <h3>Public profiles</h3>
-        <p>A username-based portfolio can be accessed through the dynamic route.</p>
+
+
+        <h3>
+          Public profiles
+        </h3>
+
+        <p>
+          Username-based portfolios can be accessed
+          through the dynamic route.
+        </p>
+
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>/u/logicnest</code></pre>
+
         </div>
-        <p>The current implementation uses demo data. A future database implementation can use the username to retrieve the correct portfolio.</p>
+
+        <p>
+          The current implementation uses demo data.
+          A database implementation can use the username
+          to retrieve the corresponding portfolio.
+        </p>
+
       </section>
+
+
+      <!-- STYLING -->
 
       <section class="doc-section" id="styling">
-        <div class="eyebrow">Customization</div>
-        <h2>Styling</h2>
-        <p>Global styling is located inside <span class="inline-code">app/globals.css</span>.</p>
-        <p>You can customize colors, typography, spacing, animations, backgrounds, cards, navigation, portfolio sections, and responsive behavior.</p>
-        <div class="callout">
-          <div class="callout-title">Tip</div>
-          <p>Start by changing the global design tokens and then modify individual components when you need more specific changes.</p>
+
+        <div class="eyebrow">
+          Customization
         </div>
+
+        <h2>
+          Styling
+        </h2>
+
+        <p>
+          Global styling is located inside
+          <span class="inline-code">
+            app/globals.css
+          </span>.
+        </p>
+
+        <p>
+          You can customize colors, typography, spacing,
+          animations, backgrounds, cards, navigation,
+          portfolio sections, and responsive behavior.
+        </p>
+
+
+        <div class="callout">
+
+          <div class="callout-title">
+            Tip
+          </div>
+
+          <p>
+            Start by changing the global design tokens,
+            then modify individual components when you
+            need more specific changes.
+          </p>
+
+        </div>
+
       </section>
+
+
+      <!-- COMPONENTS -->
 
       <section class="doc-section" id="components">
-        <div class="eyebrow">UI</div>
-        <h2>Components</h2>
-        <p>The main reusable UI components are located inside the <span class="inline-code">components/</span> directory.</p>
-        <div class="cards">
-          <div class="card">
-            <h3>navbar.tsx</h3>
-            <p>Handles the main portfolio navigation.</p>
-          </div>
-          <div class="card">
-            <h3>portfolio.tsx</h3>
-            <p>Provides the main portfolio presentation.</p>
-          </div>
-          <div class="card">
-            <h3>project-card.tsx</h3>
-            <p>Displays individual portfolio projects.</p>
-          </div>
+
+        <div class="eyebrow">
+          UI
         </div>
+
+        <h2>
+          Components
+        </h2>
+
+        <p>
+          Reusable UI components are located inside the
+          <span class="inline-code">
+            components/
+          </span>
+          directory.
+        </p>
+
+
+        <div class="cards">
+
+          <div class="card">
+
+            <h3>
+              navbar.tsx
+            </h3>
+
+            <p>
+              Handles the main portfolio navigation.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              portfolio.tsx
+            </h3>
+
+            <p>
+              Provides the main portfolio presentation.
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <h3>
+              project-card.tsx
+            </h3>
+
+            <p>
+              Displays individual portfolio projects.
+            </p>
+
+          </div>
+
+        </div>
+
       </section>
 
+
+      <!-- STRUCTURE -->
+
       <section class="doc-section" id="structure">
-        <div class="eyebrow">Architecture</div>
-        <h2>Project structure</h2>
-        <p>The repository keeps application routes, reusable components, and data definitions separated.</p>
+
+        <div class="eyebrow">
+          Architecture
+        </div>
+
+        <h2>
+          Project structure
+        </h2>
+
+        <p>
+          The repository keeps application routes,
+          reusable components, and data definitions
+          separated.
+        </p>
+
+
         <div class="tree"><span class="folder">devfolio/</span>
 │
 ├── <span class="folder">app/</span>
@@ -812,196 +1909,559 @@ cd devfolio</code></pre>
 │   ├── <span class="file">layout.tsx</span>
 │   ├── <span class="file">not-found.tsx</span>
 │   └── <span class="file">page.tsx</span>
+│
 ├── <span class="folder">components/</span>
 │   ├── <span class="file">navbar.tsx</span>
 │   ├── <span class="file">portfolio.tsx</span>
 │   └── <span class="file">project-card.tsx</span>
+│
 ├── <span class="folder">lib/</span>
 │   ├── <span class="file">demo-data.ts</span>
 │   └── <span class="file">types.ts</span>
+│
 ├── <span class="file">.env.example</span>
 ├── <span class="file">eslint.config.mjs</span>
 ├── <span class="file">next.config.ts</span>
 ├── <span class="file">package.json</span>
 └── <span class="file">tsconfig.json</span></div>
+
       </section>
+
+
+      <!-- DEPLOYMENT -->
 
       <section class="doc-section" id="deployment">
-        <div class="eyebrow">Production</div>
-        <h2>Deployment</h2>
-        <p>Devfolio can be deployed to platforms such as Vercel.</p>
-        <h3>Build the project</h3>
+
+        <div class="eyebrow">
+          Production
+        </div>
+
+        <h2>
+          Deployment
+        </h2>
+
+        <p>
+          Devfolio can be deployed to platforms such
+          as Vercel.
+        </p>
+
+
+        <h3>
+          Build the project
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>npm run build</code></pre>
+
         </div>
-        <h3>Start production</h3>
+
+
+        <h3>
+          Start production
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>npm start</code></pre>
+
         </div>
-        <h3>Vercel</h3>
-        <p>Fork the repository, import the fork into Vercel, configure any required environment variables, and deploy the project.</p>
+
+
+        <h3>
+          Vercel
+        </h3>
+
+        <p>
+          Fork the repository, import it into Vercel,
+          configure your environment variables, and
+          deploy the project.
+        </p>
+
       </section>
+
+
+      <!-- ENVIRONMENT -->
 
       <section class="doc-section" id="environment">
-        <div class="eyebrow">Configuration</div>
-        <h2>Environment variables</h2>
-        <p>If your version requires environment variables, copy <span class="inline-code">.env.example</span> to <span class="inline-code">.env.local</span> and add the required values.</p>
-        <div class="callout">
-          <div class="callout-title">Keep secrets private</div>
-          <p>Never commit API keys, passwords, tokens, or other private credentials to GitHub.</p>
+
+        <div class="eyebrow">
+          Configuration
         </div>
+
+        <h2>
+          Environment variables
+        </h2>
+
+        <p>
+          If your version requires environment variables,
+          copy
+          <span class="inline-code">
+            .env.example
+          </span>
+          to
+          <span class="inline-code">
+            .env.local
+          </span>
+          and add the required values.
+        </p>
+
+
+        <div class="callout">
+
+          <div class="callout-title">
+            Keep secrets private
+          </div>
+
+          <p>
+            Never commit API keys, passwords, tokens,
+            or other private credentials to GitHub.
+          </p>
+
+        </div>
+
       </section>
 
+
+      <!-- ROADMAP -->
+
       <section class="doc-section" id="roadmap">
-        <div class="eyebrow">Future</div>
-        <h2>Roadmap</h2>
-        <p>Devfolio is currently a starter project. These are planned additions that can turn it into a complete portfolio platform.</p>
+
+        <div class="eyebrow">
+          Future
+        </div>
+
+        <h2>
+          Roadmap
+        </h2>
+
+        <p>
+          These planned features can turn Devfolio
+          from a starter project into a complete
+          portfolio platform.
+        </p>
+
+
         <div class="table-wrap">
+
           <table>
+
             <thead>
               <tr>
                 <th>Feature</th>
                 <th>Status</th>
               </tr>
             </thead>
+
             <tbody>
-              <tr><td>User authentication</td><td>Planned</td></tr>
-              <tr><td>Database support</td><td>Planned</td></tr>
-              <tr><td>Portfolio creation system</td><td>Planned</td></tr>
-              <tr><td>Project creation and editing</td><td>Planned</td></tr>
-              <tr><td>Image uploads</td><td>Planned</td></tr>
-              <tr><td>Multiple portfolio themes</td><td>Planned</td></tr>
-              <tr><td>Live theme preview</td><td>Planned</td></tr>
-              <tr><td>Custom domains</td><td>Planned</td></tr>
-              <tr><td>Roblox integration</td><td>Planned</td></tr>
-              <tr><td>GitHub integration</td><td>Planned</td></tr>
-              <tr><td>Discord integration</td><td>Planned</td></tr>
-              <tr><td>Portfolio analytics</td><td>Planned</td></tr>
-              <tr><td>SEO controls</td><td>Planned</td></tr>
+
+              <tr>
+                <td>User authentication</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Database support</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Portfolio creation system</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Project creation and editing</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Image uploads</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Multiple portfolio themes</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Live theme preview</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Custom domains</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Roblox integration</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>GitHub integration</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Discord integration</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>Portfolio analytics</td>
+                <td>Planned</td>
+              </tr>
+
+              <tr>
+                <td>SEO controls</td>
+                <td>Planned</td>
+              </tr>
+
             </tbody>
+
           </table>
+
         </div>
+
       </section>
 
+
+      <!-- CONTRIBUTING -->
+
       <section class="doc-section" id="contributing">
-        <div class="eyebrow">Community</div>
-        <h2>Contributing</h2>
-        <p>Contributions are welcome. Keep changes focused, clean, and consistent with the existing project structure.</p>
-        <h3>Fork and clone</h3>
+
+        <div class="eyebrow">
+          Community
+        </div>
+
+        <h2>
+          Contributing
+        </h2>
+
+        <p>
+          Contributions are welcome. Keep changes focused,
+          clean, and consistent with the existing project
+          structure.
+        </p>
+
+
+        <h3>
+          Fork and clone
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>git clone https://github.com/YOUR-USERNAME/devfolio.git
 cd devfolio
 npm install</code></pre>
+
         </div>
-        <h3>Create a branch</h3>
+
+
+        <h3>
+          Create a branch
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>git checkout -b feature/my-feature</code></pre>
+
         </div>
-        <h3>Test your changes</h3>
+
+
+        <h3>
+          Test your changes
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>npm run dev</code></pre>
+
         </div>
-        <h3>Commit and push</h3>
+
+
+        <h3>
+          Commit and push
+        </h3>
+
         <div class="code-wrap">
-          <button class="copy" onclick="copyCode(this)">Copy</button>
+
+          <button class="copy" onclick="copyCode(this)">
+            Copy
+          </button>
+
           <pre><code>git add .
 git commit -m "Add my feature"
 git push origin feature/my-feature</code></pre>
+
         </div>
-        <p>After pushing your branch, open a Pull Request on GitHub.</p>
+
+        <p>
+          After pushing your branch, open a Pull Request
+          on GitHub.
+        </p>
+
       </section>
+
+
+      <!-- LICENSE -->
 
       <section class="doc-section" id="license">
-        <div class="eyebrow">Legal</div>
-        <h2>License</h2>
-        <p>Devfolio is released under the MIT License.</p>
-        <p>See the repository's <span class="inline-code">LICENSE</span> file for the complete license text.</p>
+
+        <div class="eyebrow">
+          Legal
+        </div>
+
+        <h2>
+          License
+        </h2>
+
+        <p>
+          Devfolio is released under the MIT License.
+        </p>
+
+        <p>
+          See the repository's
+          <span class="inline-code">
+            LICENSE
+          </span>
+          file for the complete license text.
+        </p>
+
       </section>
+
+
+      <!-- FINAL CTA -->
 
       <section class="doc-section">
+
         <div class="callout">
-          <div class="callout-title">Ready to build?</div>
-          <p>Fork Devfolio, customize the portfolio, and make it your own.</p>
+
+          <div class="callout-title">
+            Ready to build?
+          </div>
+
+          <p>
+            Fork Devfolio, customize your portfolio,
+            and make it your own.
+          </p>
+
         </div>
+
+
         <div class="hero-actions">
-          <a href="https://github.com/logicnestxvoidlure/devfolio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open GitHub ↗</a>
-          <a href="#top" class="btn btn-secondary">Back to top ↑</a>
+
+          <a
+            href="https://github.com/logicnestxvoidlure/devfolio"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button-primary"
+          >
+            Open GitHub
+            <span>↗</span>
+          </a>
+
+          <a
+            href="#top"
+            class="button button-secondary"
+          >
+            Back to top
+            <span>↑</span>
+          </a>
+
         </div>
+
       </section>
 
-      <div style="margin-top: 60px; border-top: 1px solid #151515; padding-top: 40px;">
-        <div style="color: #444; font-size: 10px; font-weight: 700; letter-spacing: 1.8px; text-transform: uppercase; margin-bottom: 14px;">On this page</div>
-        <div style="display: flex; flex-wrap: wrap; gap: 8px 16px;">
-          <a href="#introduction" style="color: #777; font-size: 13px; transition: .2s;">Introduction</a>
-          <a href="#getting-started" style="color: #777; font-size: 13px; transition: .2s;">Getting started</a>
-          <a href="#portfolio-data" style="color: #777; font-size: 13px; transition: .2s;">Portfolio data</a>
-          <a href="#routes" style="color: #777; font-size: 13px; transition: .2s;">Routes</a>
-          <a href="#styling" style="color: #777; font-size: 13px; transition: .2s;">Styling</a>
-          <a href="#components" style="color: #777; font-size: 13px; transition: .2s;">Components</a>
-          <a href="#structure" style="color: #777; font-size: 13px; transition: .2s;">Structure</a>
-          <a href="#deployment" style="color: #777; font-size: 13px; transition: .2s;">Deployment</a>
-          <a href="#roadmap" style="color: #777; font-size: 13px; transition: .2s;">Roadmap</a>
-          <a href="#contributing" style="color: #777; font-size: 13px; transition: .2s;">Contributing</a>
-          <a href="#license" style="color: #777; font-size: 13px; transition: .2s;">License</a>
-        </div>
-      </div>
     </main>
 
+
+    <!-- RIGHT TOC -->
+
     <aside class="toc">
-      <div class="toc-title">On this page</div>
-      <a href="#introduction">Introduction</a>
-      <a href="#getting-started">Getting started</a>
-      <a href="#portfolio-data">Portfolio data</a>
-      <a href="#routes">Routes</a>
-      <a href="#styling">Styling</a>
-      <a href="#components">Components</a>
-      <a href="#structure">Structure</a>
-      <a href="#deployment">Deployment</a>
-      <a href="#roadmap">Roadmap</a>
-      <a href="#contributing">Contributing</a>
-      <a href="#license">License</a>
+
+      <div class="toc-title">
+        On this page
+      </div>
+
+      <a href="#introduction">
+        Introduction
+      </a>
+
+      <a href="#getting-started">
+        Getting started
+      </a>
+
+      <a href="#portfolio-data">
+        Portfolio data
+      </a>
+
+      <a href="#projects">
+        Projects
+      </a>
+
+      <a href="#routes">
+        Routes
+      </a>
+
+      <a href="#styling">
+        Styling
+      </a>
+
+      <a href="#components">
+        Components
+      </a>
+
+      <a href="#structure">
+        Structure
+      </a>
+
+      <a href="#deployment">
+        Deployment
+      </a>
+
+      <a href="#roadmap">
+        Roadmap
+      </a>
+
+      <a href="#contributing">
+        Contributing
+      </a>
+
+      <a href="#license">
+        License
+      </a>
+
     </aside>
+
   </div>
 
-  <footer>Devfolio · Documentation · MIT License</footer>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    <div class="footer-inner">
+
+      <span>
+        Devfolio · Documentation
+      </span>
+
+      <span>
+        MIT License
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
 
   <script>
+
+    /* Copy code */
+
     function copyCode(button) {
-      const code = button.parentElement.querySelector("code").innerText;
+
+      const code =
+        button.parentElement
+          .querySelector("code")
+          .innerText;
+
       navigator.clipboard.writeText(code);
-      const original = button.innerText;
+
+      const original =
+        button.innerText;
+
       button.innerText = "Copied";
+
       setTimeout(() => {
         button.innerText = original;
       }, 1200);
+
     }
 
-    const sections = document.querySelectorAll("main section[id], .hero");
-    const links = document.querySelectorAll(".sidebar a");
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (!entry.isIntersecting) return;
-        links.forEach(link => {
-          link.classList.remove("active");
-          if (link.getAttribute("href") === "#" + entry.target.id) {
-            link.classList.add("active");
-          }
-        });
-      });
-    }, {
-      rootMargin: "-20% 0px -70% 0px"
-    });
+
+    /* Active sidebar item */
+
+    const sections =
+      document.querySelectorAll(
+        "main section[id]"
+      );
+
+    const sidebarLinks =
+      document.querySelectorAll(
+        ".sidebar-link"
+      );
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (!entry.isIntersecting)
+              return;
+
+            sidebarLinks.forEach(link => {
+
+              link.classList.remove(
+                "active"
+              );
+
+              if (
+                link.getAttribute("href") ===
+                "#" + entry.target.id
+              ) {
+                link.classList.add(
+                  "active"
+                );
+              }
+
+            });
+
+          });
+
+        },
+        {
+          rootMargin:
+            "-20% 0px -65% 0px",
+          threshold: 0
+        }
+      );
+
 
     sections.forEach(section => {
-      if (section.id) {
-        observer.observe(section);
-      }
+      observer.observe(section);
     });
+
   </script>
+
 </body>
 </html>
