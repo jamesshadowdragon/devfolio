@@ -1,16 +1,10 @@
 <!DOCTYPE html>
-
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <title>Devfolio Docs</title>
-  <meta
-    name="description"
-    content="Documentation for Devfolio — a modern, minimal developer portfolio builder."
-  >
-
+  <meta name="description" content="Documentation for Devfolio — a modern, minimal developer portfolio builder.">
   <style>
     * {
       margin: 0;
@@ -40,14 +34,7 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       line-height: 1.7;
       overflow-x: hidden;
     }
@@ -61,17 +48,9 @@
       font: inherit;
     }
 
-    code,
-    pre {
-      font-family:
-        "SFMono-Regular",
-        Consolas,
-        "Liberation Mono",
-        Menlo,
-        monospace;
+    code, pre {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
     }
-
-    /* ---------------- NAV ---------------- */
 
     nav {
       position: fixed;
@@ -139,8 +118,6 @@
       border-color: white;
     }
 
-    /* ---------------- LAYOUT ---------------- */
-
     .layout {
       width: min(1280px, calc(100% - 40px));
       margin: 0 auto;
@@ -149,8 +126,6 @@
       gap: 60px;
       padding-top: 68px;
     }
-
-    /* ---------------- SIDEBAR ---------------- */
 
     .sidebar {
       position: sticky;
@@ -185,8 +160,6 @@
     .sidebar a.active {
       color: white;
     }
-
-    /* ---------------- MAIN ---------------- */
 
     main {
       min-width: 0;
@@ -258,8 +231,6 @@
       background: #151515;
     }
 
-    /* ---------------- DOC SECTIONS ---------------- */
-
     .doc-section {
       padding-top: 90px;
       border-top: 1px solid #151515;
@@ -294,8 +265,6 @@
       color: #ddd;
     }
 
-    /* ---------------- CARDS ---------------- */
-
     .cards {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -327,8 +296,6 @@
       font-size: 13px;
       color: #707070;
     }
-
-    /* ---------------- CODE ---------------- */
 
     .code-wrap {
       position: relative;
@@ -373,8 +340,6 @@
       font-size: 12px;
     }
 
-    /* ---------------- CALLOUT ---------------- */
-
     .callout {
       border: 1px solid #242424;
       background: #0b0b0b;
@@ -395,8 +360,6 @@
       font-size: 13px;
     }
 
-    /* ---------------- TABLE ---------------- */
-
     .table-wrap {
       overflow-x: auto;
       border: 1px solid var(--border);
@@ -410,8 +373,7 @@
       font-size: 13px;
     }
 
-    th,
-    td {
+    th, td {
       padding: 13px 15px;
       border-bottom: 1px solid var(--border);
       text-align: left;
@@ -430,8 +392,6 @@
     tr:last-child td {
       border-bottom: none;
     }
-
-    /* ---------------- TREE ---------------- */
 
     .tree {
       margin-top: 20px;
@@ -453,8 +413,6 @@
     .file {
       color: #777;
     }
-
-    /* ---------------- RIGHT TOC ---------------- */
 
     .toc {
       position: sticky;
@@ -484,8 +442,6 @@
       color: #aaa;
     }
 
-    /* ---------------- FOOTER ---------------- */
-
     footer {
       border-top: 1px solid #151515;
       padding: 30px 0;
@@ -493,8 +449,6 @@
       font-size: 11px;
       text-align: center;
     }
-
-    /* ---------------- RESPONSIVE ---------------- */
 
     @media (max-width: 1050px) {
       .layout {
@@ -571,1162 +525,460 @@
       }
     }
   </style>
-
 </head>
-
 <body>
-
-  <!-- NAV -->
 
   <nav>
     <div class="nav-inner">
-
-```
-  <a href="#top" class="logo">
-    Dev<span>folio</span>
-  </a>
-
-  <div class="nav-right">
-
-    <a class="nav-link" href="#getting-started">
-      Documentation
-    </a>
-
-    <a
-      class="github"
-      href="https://github.com/logicnestxvoidlure/devfolio"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      GitHub ↗
-    </a>
-
-  </div>
-
-</div>
-```
-
+      <a href="#top" class="logo">Dev<span>folio</span></a>
+      <div class="nav-right">
+        <a class="nav-link" href="#getting-started">Documentation</a>
+        <a class="github" href="https://github.com/logicnestxvoidlure/devfolio" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+      </div>
+    </div>
   </nav>
 
   <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-group">
+        <div class="sidebar-title">Getting started</div>
+        <a href="#introduction">Introduction</a>
+        <a href="#getting-started">Installation</a>
+        <a href="#development">Development</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-title">Using Devfolio</div>
+        <a href="#portfolio-data">Portfolio data</a>
+        <a href="#projects">Projects</a>
+        <a href="#routes">Routes</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-title">Customization</div>
+        <a href="#styling">Styling</a>
+        <a href="#components">Components</a>
+        <a href="#structure">Project structure</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-title">Deployment</div>
+        <a href="#deployment">Deployment</a>
+        <a href="#environment">Environment</a>
+      </div>
+      <div class="sidebar-group">
+        <div class="sidebar-title">Community</div>
+        <a href="#roadmap">Roadmap</a>
+        <a href="#contributing">Contributing</a>
+        <a href="#license">License</a>
+      </div>
+    </aside>
 
-```
-<!-- SIDEBAR -->
-
-<aside class="sidebar">
-
-  <div class="sidebar-group">
-
-    <div class="sidebar-title">
-      Getting started
-    </div>
-
-    <a href="#introduction">Introduction</a>
-    <a href="#getting-started">Installation</a>
-    <a href="#development">Development</a>
-
-  </div>
-
-
-  <div class="sidebar-group">
-
-    <div class="sidebar-title">
-      Using Devfolio
-    </div>
-
-    <a href="#portfolio-data">Portfolio data</a>
-    <a href="#projects">Projects</a>
-    <a href="#routes">Routes</a>
-
-  </div>
-
-
-  <div class="sidebar-group">
-
-    <div class="sidebar-title">
-      Customization
-    </div>
-
-    <a href="#styling">Styling</a>
-    <a href="#components">Components</a>
-    <a href="#structure">Project structure</a>
-
-  </div>
-
-
-  <div class="sidebar-group">
-
-    <div class="sidebar-title">
-      Deployment
-    </div>
-
-    <a href="#deployment">Deployment</a>
-    <a href="#environment">Environment</a>
-
-  </div>
-
-
-  <div class="sidebar-group">
-
-    <div class="sidebar-title">
-      Community
-    </div>
-
-    <a href="#roadmap">Roadmap</a>
-    <a href="#contributing">Contributing</a>
-    <a href="#license">License</a>
-
-  </div>
-
-</aside>
-
-
-<!-- DOCUMENTATION -->
-
-<main id="top">
-
-  <!-- HERO -->
-
-  <div class="hero">
-
-    <div class="eyebrow">
-      Devfolio documentation
-    </div>
-
-    <h1>
-      Build your portfolio.<br>
-      <span>Make it yours.</span>
-    </h1>
-
-    <p class="hero-description">
-      Devfolio is a modern, minimal portfolio starter built
-      for Roblox developers, creators, scripters, builders,
-      UI designers, and developers.
-    </p>
-
-    <div class="hero-actions">
-
-      <a
-        href="#getting-started"
-        class="btn btn-primary"
-      >
-        Get started →
-      </a>
-
-      <a
-        href="https://github.com/logicnestxvoidlure/devfolio"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-secondary"
-      >
-        View source ↗
-      </a>
-
-    </div>
-
-  </div>
-
-
-  <!-- INTRODUCTION -->
-
-  <section class="doc-section" id="introduction">
-
-    <div class="eyebrow">
-      Overview
-    </div>
-
-    <h2>Introduction</h2>
-
-    <p>
-      Devfolio is a lightweight developer portfolio project
-      designed to be forked, customized, and deployed.
-    </p>
-
-    <p>
-      It provides a clean foundation for showcasing your
-      profile, projects, skills, social links, and other
-      developer information without starting from scratch.
-    </p>
-
-    <div class="callout">
-
-      <div class="callout-title">
-        What Devfolio is
+    <main id="top">
+      <div class="hero">
+        <div class="eyebrow">Devfolio documentation</div>
+        <h1>Build your portfolio.<br><span>Make it yours.</span></h1>
+        <p class="hero-description">Devfolio is a modern, minimal portfolio starter built for Roblox developers, creators, scripters, builders, UI designers, and developers.</p>
+        <div class="hero-actions">
+          <a href="#getting-started" class="btn btn-primary">Get started →</a>
+          <a href="https://github.com/logicnestxvoidlure/devfolio" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">View source ↗</a>
+        </div>
       </div>
 
-      <p>
-        A customizable portfolio starter that you can turn
-        into your own personal website or expand into a
-        complete portfolio platform.
-      </p>
+      <section class="doc-section" id="introduction">
+        <div class="eyebrow">Overview</div>
+        <h2>Introduction</h2>
+        <p>Devfolio is a lightweight developer portfolio project designed to be forked, customized, and deployed.</p>
+        <p>It provides a clean foundation for showcasing your profile, projects, skills, social links, and other developer information without starting from scratch.</p>
+        <div class="callout">
+          <div class="callout-title">What Devfolio is</div>
+          <p>A customizable portfolio starter that you can turn into your own personal website or expand into a complete portfolio platform.</p>
+        </div>
+        <div class="cards">
+          <div class="card">
+            <div class="card-number">01</div>
+            <h3>Minimal</h3>
+            <p>A dark, developer-focused interface with a clean visual system.</p>
+          </div>
+          <div class="card">
+            <div class="card-number">02</div>
+            <h3>Responsive</h3>
+            <p>Designed to work across desktop, tablet, and mobile screens.</p>
+          </div>
+          <div class="card">
+            <div class="card-number">03</div>
+            <h3>Customizable</h3>
+            <p>Modify the data, components, styling, and structure to fit your needs.</p>
+          </div>
+          <div class="card">
+            <div class="card-number">04</div>
+            <h3>Open source</h3>
+            <p>Fork the repository and build your own version on top of the existing foundation.</p>
+          </div>
+        </div>
+      </section>
 
-    </div>
-
-
-    <div class="cards">
-
-      <div class="card">
-        <div class="card-number">01</div>
-        <h3>Minimal</h3>
-        <p>
-          A dark, developer-focused interface with a clean
-          visual system.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-number">02</div>
-        <h3>Responsive</h3>
-        <p>
-          Designed to work across desktop, tablet,
-          and mobile screens.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-number">03</div>
-        <h3>Customizable</h3>
-        <p>
-          Modify the data, components, styling, and
-          structure to fit your needs.
-        </p>
-      </div>
-
-      <div class="card">
-        <div class="card-number">04</div>
-        <h3>Open source</h3>
-        <p>
-          Fork the repository and build your own version
-          on top of the existing foundation.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- GETTING STARTED -->
-
-  <section class="doc-section" id="getting-started">
-
-    <div class="eyebrow">
-      Installation
-    </div>
-
-    <h2>Getting started</h2>
-
-    <p>
-      Get Devfolio running locally in a few steps.
-    </p>
-
-    <h3>Requirements</h3>
-
-    <p>
-      Before starting, make sure you have Node.js 18.18+
-      installed, along with npm and Git.
-    </p>
-
-
-    <h3>Clone the repository</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>git clone https://github.com/logicnestxvoidlure/devfolio.git
-```
-
+      <section class="doc-section" id="getting-started">
+        <div class="eyebrow">Installation</div>
+        <h2>Getting started</h2>
+        <p>Get Devfolio running locally in a few steps.</p>
+        <h3>Requirements</h3>
+        <p>Before starting, make sure you have Node.js 18.18+ installed, along with npm and Git.</p>
+        <h3>Clone the repository</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>git clone https://github.com/logicnestxvoidlure/devfolio.git
 cd devfolio</code></pre>
+        </div>
+        <h3>Install dependencies</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>npm install</code></pre>
+        </div>
+        <h3>Start the development server</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>npm run dev</code></pre>
+        </div>
+        <p>Once the server starts, open <span class="inline-code">http://localhost:3000</span> in your browser.</p>
+      </section>
 
-```
-    </div>
+      <section class="doc-section" id="development">
+        <div class="eyebrow">Development</div>
+        <h2>Development workflow</h2>
+        <p>Devfolio uses Next.js with TypeScript and Tailwind CSS. The project uses the Next.js App Router.</p>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>npm run dev</code></pre>
+        </div>
+        <p>Make your changes inside the application, save the file, and Next.js will update the development server automatically.</p>
+      </section>
 
-
-    <h3>Install dependencies</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>npm install</code></pre>
-
-    </div>
-
-
-    <h3>Start the development server</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>npm run dev</code></pre>
-
-    </div>
-
-    <p>
-      Once the server starts, open
-      <span class="inline-code">http://localhost:3000</span>
-      in your browser.
-    </p>
-
-  </section>
-
-
-  <!-- DEVELOPMENT -->
-
-  <section class="doc-section" id="development">
-
-    <div class="eyebrow">
-      Development
-    </div>
-
-    <h2>Development workflow</h2>
-
-    <p>
-      Devfolio uses Next.js with TypeScript and Tailwind CSS.
-      The project uses the Next.js App Router.
-    </p>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>npm run dev</code></pre>
-
-    </div>
-
-    <p>
-      Make your changes inside the application, save the file,
-      and Next.js will update the development server automatically.
-    </p>
-
-  </section>
-
-
-  <!-- PORTFOLIO DATA -->
-
-  <section class="doc-section" id="portfolio-data">
-
-    <div class="eyebrow">
-      Configuration
-    </div>
-
-    <h2>Portfolio data</h2>
-
-    <p>
-      The starter portfolio currently uses demo data stored
-      inside <span class="inline-code">lib/demo-data.ts</span>.
-    </p>
-
-    <p>
-      This is the main place to customize the example portfolio
-      before connecting the project to a database.
-    </p>
-
-    <h3>Available information</h3>
-
-    <div class="cards">
-
-      <div class="card">
-        <h3>Profile</h3>
-        <p>
-          Display name, username, headline, bio, avatar,
-          and location.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Skills</h3>
-        <p>
-          Technologies, tools, and skills displayed
-          on the portfolio.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Socials</h3>
-        <p>
-          Links to platforms such as Roblox, Discord,
-          and GitHub.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>Projects</h3>
-        <p>
-          Project titles, descriptions, roles, images,
-          tags, links, and featured status.
-        </p>
-      </div>
-
-    </div>
-
-
-    <h3>Example</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>export const demoPortfolio: Portfolio = {
-```
-
-username: "yourusername",
-displayName: "Your Name",
-headline: "Roblox Developer",
-bio: "I create Roblox experiences and systems.",
-avatar: "YOUR_AVATAR_URL",
-
-skills: [
-"Luau",
-"Roblox Studio",
-"UI/UX",
-"Building"
-],
-
-socials: {
-roblox: "YOUR_ROBLOX_URL",
-discord: "YOUR_DISCORD_URL",
-github: "YOUR_GITHUB_URL"
-},
-
-projects: [
-{
-id: "1",
-title: "My Roblox Game",
-description: "A Roblox project I worked on.",
-role: "Scripter",
-image: "YOUR_IMAGE_URL",
-tags: ["Luau", "Roblox"],
-link: "YOUR_GAME_URL",
-featured: true
-}
-]
+      <section class="doc-section" id="portfolio-data">
+        <div class="eyebrow">Configuration</div>
+        <h2>Portfolio data</h2>
+        <p>The starter portfolio currently uses demo data stored inside <span class="inline-code">lib/demo-data.ts</span>.</p>
+        <p>This is the main place to customize the example portfolio before connecting the project to a database.</p>
+        <h3>Available information</h3>
+        <div class="cards">
+          <div class="card">
+            <h3>Profile</h3>
+            <p>Display name, username, headline, bio, avatar, and location.</p>
+          </div>
+          <div class="card">
+            <h3>Skills</h3>
+            <p>Technologies, tools, and skills displayed on the portfolio.</p>
+          </div>
+          <div class="card">
+            <h3>Socials</h3>
+            <p>Links to platforms such as Roblox, Discord, and GitHub.</p>
+          </div>
+          <div class="card">
+            <h3>Projects</h3>
+            <p>Project titles, descriptions, roles, images, tags, links, and featured status.</p>
+          </div>
+        </div>
+        <h3>Example</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>export const demoPortfolio: Portfolio = {
+  username: "yourusername",
+  displayName: "Your Name",
+  headline: "Roblox Developer",
+  bio: "I create Roblox experiences and systems.",
+  avatar: "YOUR_AVATAR_URL",
+  skills: [
+    "Luau",
+    "Roblox Studio",
+    "UI/UX",
+    "Building"
+  ],
+  socials: {
+    roblox: "YOUR_ROBLOX_URL",
+    discord: "YOUR_DISCORD_URL",
+    github: "YOUR_GITHUB_URL"
+  },
+  projects: [
+    {
+      id: "1",
+      title: "My Roblox Game",
+      description: "A Roblox project I worked on.",
+      role: "Scripter",
+      image: "YOUR_IMAGE_URL",
+      tags: ["Luau", "Roblox"],
+      link: "YOUR_GAME_URL",
+      featured: true
+    }
+  ]
 };</code></pre>
-
-```
-    </div>
-
-  </section>
-
-
-  <!-- PROJECTS -->
-
-  <section class="doc-section" id="projects">
-
-    <div class="eyebrow">
-      Content
-    </div>
-
-    <h2>Projects</h2>
-
-    <p>
-      Projects are part of the portfolio data structure.
-      Each project can contain information used by the
-      project card component.
-    </p>
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          <tr>
-            <td>id</td>
-            <td>Unique identifier for the project.</td>
-          </tr>
-
-          <tr>
-            <td>title</td>
-            <td>Name displayed for the project.</td>
-          </tr>
-
-          <tr>
-            <td>description</td>
-            <td>Short explanation of the project.</td>
-          </tr>
-
-          <tr>
-            <td>role</td>
-            <td>Your role on the project.</td>
-          </tr>
-
-          <tr>
-            <td>image</td>
-            <td>Project preview image.</td>
-          </tr>
-
-          <tr>
-            <td>tags</td>
-            <td>Technologies or categories.</td>
-          </tr>
-
-          <tr>
-            <td>link</td>
-            <td>External project URL.</td>
-          </tr>
-
-          <tr>
-            <td>featured</td>
-            <td>Whether the project is featured.</td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </section>
-
-
-  <!-- ROUTES -->
-
-  <section class="doc-section" id="routes">
-
-    <div class="eyebrow">
-      Navigation
-    </div>
-
-    <h2>Routes</h2>
-
-    <p>
-      Devfolio currently includes three main application routes.
-    </p>
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-          <tr>
-            <th>Route</th>
-            <th>Purpose</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          <tr>
-            <td>/</td>
-            <td>Demo public portfolio.</td>
-          </tr>
-
-          <tr>
-            <td>/dashboard</td>
-            <td>Starter portfolio editor.</td>
-          </tr>
-
-          <tr>
-            <td>/u/[username]</td>
-            <td>Public username-based portfolio.</td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-
-    <h3>Public profiles</h3>
-
-    <p>
-      A username-based portfolio can be accessed through
-      the dynamic route.
-    </p>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>/u/logicnest</code></pre>
-
-    </div>
-
-    <p>
-      The current implementation uses demo data.
-      A future database implementation can use the username
-      to retrieve the correct portfolio.
-    </p>
-
-  </section>
-
-
-  <!-- STYLING -->
-
-  <section class="doc-section" id="styling">
-
-    <div class="eyebrow">
-      Customization
-    </div>
-
-    <h2>Styling</h2>
-
-    <p>
-      Global styling is located inside
-      <span class="inline-code">app/globals.css</span>.
-    </p>
-
-    <p>
-      You can customize colors, typography, spacing,
-      animations, backgrounds, cards, navigation,
-      portfolio sections, and responsive behavior.
-    </p>
-
-    <div class="callout">
-
-      <div class="callout-title">
-        Tip
-      </div>
-
-      <p>
-        Start by changing the global design tokens and
-        then modify individual components when you need
-        more specific changes.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- COMPONENTS -->
-
-  <section class="doc-section" id="components">
-
-    <div class="eyebrow">
-      UI
-    </div>
-
-    <h2>Components</h2>
-
-    <p>
-      The main reusable UI components are located inside
-      the <span class="inline-code">components/</span> directory.
-    </p>
-
-    <div class="cards">
-
-      <div class="card">
-        <h3>navbar.tsx</h3>
-        <p>
-          Handles the main portfolio navigation.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>portfolio.tsx</h3>
-        <p>
-          Provides the main portfolio presentation.
-        </p>
-      </div>
-
-      <div class="card">
-        <h3>project-card.tsx</h3>
-        <p>
-          Displays individual portfolio projects.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <!-- STRUCTURE -->
-
-  <section class="doc-section" id="structure">
-
-    <div class="eyebrow">
-      Architecture
-    </div>
-
-    <h2>Project structure</h2>
-
-    <p>
-      The repository keeps application routes,
-      reusable components, and data definitions separated.
-    </p>
-
-    <div class="tree"><span class="folder">devfolio/</span>
-```
-
+        </div>
+      </section>
+
+      <section class="doc-section" id="projects">
+        <div class="eyebrow">Content</div>
+        <h2>Projects</h2>
+        <p>Projects are part of the portfolio data structure. Each project can contain information used by the project card component.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>id</td><td>Unique identifier for the project.</td></tr>
+              <tr><td>title</td><td>Name displayed for the project.</td></tr>
+              <tr><td>description</td><td>Short explanation of the project.</td></tr>
+              <tr><td>role</td><td>Your role on the project.</td></tr>
+              <tr><td>image</td><td>Project preview image.</td></tr>
+              <tr><td>tags</td><td>Technologies or categories.</td></tr>
+              <tr><td>link</td><td>External project URL.</td></tr>
+              <tr><td>featured</td><td>Whether the project is featured.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="doc-section" id="routes">
+        <div class="eyebrow">Navigation</div>
+        <h2>Routes</h2>
+        <p>Devfolio currently includes three main application routes.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Route</th>
+                <th>Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>/</td><td>Demo public portfolio.</td></tr>
+              <tr><td>/dashboard</td><td>Starter portfolio editor.</td></tr>
+              <tr><td>/u/[username]</td><td>Public username-based portfolio.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3>Public profiles</h3>
+        <p>A username-based portfolio can be accessed through the dynamic route.</p>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>/u/logicnest</code></pre>
+        </div>
+        <p>The current implementation uses demo data. A future database implementation can use the username to retrieve the correct portfolio.</p>
+      </section>
+
+      <section class="doc-section" id="styling">
+        <div class="eyebrow">Customization</div>
+        <h2>Styling</h2>
+        <p>Global styling is located inside <span class="inline-code">app/globals.css</span>.</p>
+        <p>You can customize colors, typography, spacing, animations, backgrounds, cards, navigation, portfolio sections, and responsive behavior.</p>
+        <div class="callout">
+          <div class="callout-title">Tip</div>
+          <p>Start by changing the global design tokens and then modify individual components when you need more specific changes.</p>
+        </div>
+      </section>
+
+      <section class="doc-section" id="components">
+        <div class="eyebrow">UI</div>
+        <h2>Components</h2>
+        <p>The main reusable UI components are located inside the <span class="inline-code">components/</span> directory.</p>
+        <div class="cards">
+          <div class="card">
+            <h3>navbar.tsx</h3>
+            <p>Handles the main portfolio navigation.</p>
+          </div>
+          <div class="card">
+            <h3>portfolio.tsx</h3>
+            <p>Provides the main portfolio presentation.</p>
+          </div>
+          <div class="card">
+            <h3>project-card.tsx</h3>
+            <p>Displays individual portfolio projects.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="doc-section" id="structure">
+        <div class="eyebrow">Architecture</div>
+        <h2>Project structure</h2>
+        <p>The repository keeps application routes, reusable components, and data definitions separated.</p>
+        <div class="tree"><span class="folder">devfolio/</span>
 │
 ├── <span class="folder">app/</span>
 │   ├── <span class="folder">dashboard/</span>
 │   │   └── <span class="file">page.tsx</span>
-│   │
 │   ├── <span class="folder">u/</span>
 │   │   └── <span class="folder">[username]/</span>
 │   │       └── <span class="file">page.tsx</span>
-│   │
 │   ├── <span class="file">globals.css</span>
 │   ├── <span class="file">layout.tsx</span>
 │   ├── <span class="file">not-found.tsx</span>
 │   └── <span class="file">page.tsx</span>
-│
 ├── <span class="folder">components/</span>
 │   ├── <span class="file">navbar.tsx</span>
 │   ├── <span class="file">portfolio.tsx</span>
 │   └── <span class="file">project-card.tsx</span>
-│
 ├── <span class="folder">lib/</span>
 │   ├── <span class="file">demo-data.ts</span>
 │   └── <span class="file">types.ts</span>
-│
 ├── <span class="file">.env.example</span>
 ├── <span class="file">eslint.config.mjs</span>
 ├── <span class="file">next.config.ts</span>
 ├── <span class="file">package.json</span>
 └── <span class="file">tsconfig.json</span></div>
-
-```
-  </section>
-
-
-  <!-- DEPLOYMENT -->
-
-  <section class="doc-section" id="deployment">
-
-    <div class="eyebrow">
-      Production
-    </div>
-
-    <h2>Deployment</h2>
-
-    <p>
-      Devfolio can be deployed to platforms such as Vercel.
-    </p>
-
-    <h3>Build the project</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>npm run build</code></pre>
-
-    </div>
-
-
-    <h3>Start production</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>npm start</code></pre>
-
-    </div>
-
-
-    <h3>Vercel</h3>
-
-    <p>
-      Fork the repository, import the fork into Vercel,
-      configure any required environment variables,
-      and deploy the project.
-    </p>
-
-  </section>
-
-
-  <!-- ENVIRONMENT -->
-
-  <section class="doc-section" id="environment">
-
-    <div class="eyebrow">
-      Configuration
-    </div>
-
-    <h2>Environment variables</h2>
-
-    <p>
-      If your version requires environment variables,
-      copy <span class="inline-code">.env.example</span>
-      to <span class="inline-code">.env.local</span>
-      and add the required values.
-    </p>
-
-    <div class="callout">
-
-      <div class="callout-title">
-        Keep secrets private
-      </div>
-
-      <p>
-        Never commit API keys, passwords, tokens, or other
-        private credentials to GitHub.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- ROADMAP -->
-
-  <section class="doc-section" id="roadmap">
-
-    <div class="eyebrow">
-      Future
-    </div>
-
-    <h2>Roadmap</h2>
-
-    <p>
-      Devfolio is currently a starter project.
-      These are planned additions that can turn it into
-      a complete portfolio platform.
-    </p>
-
-    <div class="table-wrap">
-
-      <table>
-
-        <thead>
-          <tr>
-            <th>Feature</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-
-        <tbody>
-
-          <tr>
-            <td>User authentication</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Database support</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Portfolio creation system</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Project creation and editing</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Image uploads</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Multiple portfolio themes</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Live theme preview</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Custom domains</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Roblox integration</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>GitHub integration</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Discord integration</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>Portfolio analytics</td>
-            <td>Planned</td>
-          </tr>
-
-          <tr>
-            <td>SEO controls</td>
-            <td>Planned</td>
-          </tr>
-
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </section>
-
-
-  <!-- CONTRIBUTING -->
-
-  <section class="doc-section" id="contributing">
-
-    <div class="eyebrow">
-      Community
-    </div>
-
-    <h2>Contributing</h2>
-
-    <p>
-      Contributions are welcome. Keep changes focused,
-      clean, and consistent with the existing project structure.
-    </p>
-
-    <h3>Fork and clone</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>git clone https://github.com/YOUR-USERNAME/devfolio.git
-```
-
+      </section>
+
+      <section class="doc-section" id="deployment">
+        <div class="eyebrow">Production</div>
+        <h2>Deployment</h2>
+        <p>Devfolio can be deployed to platforms such as Vercel.</p>
+        <h3>Build the project</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>npm run build</code></pre>
+        </div>
+        <h3>Start production</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>npm start</code></pre>
+        </div>
+        <h3>Vercel</h3>
+        <p>Fork the repository, import the fork into Vercel, configure any required environment variables, and deploy the project.</p>
+      </section>
+
+      <section class="doc-section" id="environment">
+        <div class="eyebrow">Configuration</div>
+        <h2>Environment variables</h2>
+        <p>If your version requires environment variables, copy <span class="inline-code">.env.example</span> to <span class="inline-code">.env.local</span> and add the required values.</p>
+        <div class="callout">
+          <div class="callout-title">Keep secrets private</div>
+          <p>Never commit API keys, passwords, tokens, or other private credentials to GitHub.</p>
+        </div>
+      </section>
+
+      <section class="doc-section" id="roadmap">
+        <div class="eyebrow">Future</div>
+        <h2>Roadmap</h2>
+        <p>Devfolio is currently a starter project. These are planned additions that can turn it into a complete portfolio platform.</p>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>User authentication</td><td>Planned</td></tr>
+              <tr><td>Database support</td><td>Planned</td></tr>
+              <tr><td>Portfolio creation system</td><td>Planned</td></tr>
+              <tr><td>Project creation and editing</td><td>Planned</td></tr>
+              <tr><td>Image uploads</td><td>Planned</td></tr>
+              <tr><td>Multiple portfolio themes</td><td>Planned</td></tr>
+              <tr><td>Live theme preview</td><td>Planned</td></tr>
+              <tr><td>Custom domains</td><td>Planned</td></tr>
+              <tr><td>Roblox integration</td><td>Planned</td></tr>
+              <tr><td>GitHub integration</td><td>Planned</td></tr>
+              <tr><td>Discord integration</td><td>Planned</td></tr>
+              <tr><td>Portfolio analytics</td><td>Planned</td></tr>
+              <tr><td>SEO controls</td><td>Planned</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="doc-section" id="contributing">
+        <div class="eyebrow">Community</div>
+        <h2>Contributing</h2>
+        <p>Contributions are welcome. Keep changes focused, clean, and consistent with the existing project structure.</p>
+        <h3>Fork and clone</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>git clone https://github.com/YOUR-USERNAME/devfolio.git
 cd devfolio
 npm install</code></pre>
-
-```
-    </div>
-
-
-    <h3>Create a branch</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>git checkout -b feature/my-feature</code></pre>
-
-    </div>
-
-
-    <h3>Test your changes</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>npm run dev</code></pre>
-
-    </div>
-
-
-    <h3>Commit and push</h3>
-
-    <div class="code-wrap">
-
-      <button class="copy" onclick="copyCode(this)">
-        Copy
-      </button>
-
-      <pre><code>git add .
-```
-
+        </div>
+        <h3>Create a branch</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>git checkout -b feature/my-feature</code></pre>
+        </div>
+        <h3>Test your changes</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>npm run dev</code></pre>
+        </div>
+        <h3>Commit and push</h3>
+        <div class="code-wrap">
+          <button class="copy" onclick="copyCode(this)">Copy</button>
+          <pre><code>git add .
 git commit -m "Add my feature"
 git push origin feature/my-feature</code></pre>
+        </div>
+        <p>After pushing your branch, open a Pull Request on GitHub.</p>
+      </section>
 
-```
-    </div>
+      <section class="doc-section" id="license">
+        <div class="eyebrow">Legal</div>
+        <h2>License</h2>
+        <p>Devfolio is released under the MIT License.</p>
+        <p>See the repository's <span class="inline-code">LICENSE</span> file for the complete license text.</p>
+      </section>
 
-    <p>
-      After pushing your branch, open a Pull Request
-      on GitHub.
-    </p>
+      <section class="doc-section">
+        <div class="callout">
+          <div class="callout-title">Ready to build?</div>
+          <p>Fork Devfolio, customize the portfolio, and make it your own.</p>
+        </div>
+        <div class="hero-actions">
+          <a href="https://github.com/logicnestxvoidlure/devfolio" target="_blank" rel="noopener noreferrer" class="btn btn-primary">Open GitHub ↗</a>
+          <a href="#top" class="btn btn-secondary">Back to top ↑</a>
+        </div>
+      </section>
+    </main>
 
-  </section>
-
-
-  <!-- LICENSE -->
-
-  <section class="doc-section" id="license">
-
-    <div class="eyebrow">
-      Legal
-    </div>
-
-    <h2>License</h2>
-
-    <p>
-      Devfolio is released under the MIT License.
-    </p>
-
-    <p>
-      See the repository's
-      <span class="inline-code">LICENSE</span>
-      file for the complete license text.
-    </p>
-
-  </section>
-
-
-  <!-- END -->
-
-  <section class="doc-section">
-
-    <div class="callout">
-
-      <div class="callout-title">
-        Ready to build?
-      </div>
-
-      <p>
-        Fork Devfolio, customize the portfolio,
-        and make it your own.
-      </p>
-
-    </div>
-
-    <div class="hero-actions">
-
-      <a
-        href="https://github.com/logicnestxvoidlure/devfolio"
-        target="_blank"
-        rel="noopener noreferrer"
-        class="btn btn-primary"
-      >
-        Open GitHub ↗
-      </a>
-
-      <a
-        href="#top"
-        class="btn btn-secondary"
-      >
-        Back to top ↑
-      </a>
-
-    </div>
-
-  </section>
-
-</main>
-
-
-<!-- RIGHT TOC -->
-
-<aside class="toc">
-
-  <div class="toc-title">
-    On this page
+    <aside class="toc">
+      <div class="toc-title">On this page</div>
+      <a href="#introduction">Introduction</a>
+      <a href="#getting-started">Getting started</a>
+      <a href="#portfolio-data">Portfolio data</a>
+      <a href="#routes">Routes</a>
+      <a href="#styling">Styling</a>
+      <a href="#components">Components</a>
+      <a href="#structure">Structure</a>
+      <a href="#deployment">Deployment</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#contributing">Contributing</a>
+      <a href="#license">License</a>
+    </aside>
   </div>
 
-  <a href="#introduction">Introduction</a>
-  <a href="#getting-started">Getting started</a>
-  <a href="#portfolio-data">Portfolio data</a>
-  <a href="#routes">Routes</a>
-  <a href="#styling">Styling</a>
-  <a href="#components">Components</a>
-  <a href="#structure">Structure</a>
-  <a href="#deployment">Deployment</a>
-  <a href="#roadmap">Roadmap</a>
-  <a href="#contributing">Contributing</a>
-  <a href="#license">License</a>
-
-</aside>
-```
-
-  </div>
-
-  <!-- FOOTER -->
-
-  <footer>
-
-```
-Devfolio · Documentation · MIT License
-```
-
-  </footer>
+  <footer>Devfolio · Documentation · MIT License</footer>
 
   <script>
     function copyCode(button) {
-      const code = button
-        .parentElement
-        .querySelector("code")
-        .innerText;
-
+      const code = button.parentElement.querySelector("code").innerText;
       navigator.clipboard.writeText(code);
-
       const original = button.innerText;
-
       button.innerText = "Copied";
-
       setTimeout(() => {
         button.innerText = original;
       }, 1200);
     }
 
-
-    const sections = document.querySelectorAll(
-      "main section[id], .hero"
-    );
-
-    const links = document.querySelectorAll(
-      ".sidebar a"
-    );
-
-    const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
-
-          if (!entry.isIntersecting) return;
-
-          links.forEach(link => {
-            link.classList.remove("active");
-
-            if (
-              link.getAttribute("href") ===
-              "#" + entry.target.id
-            ) {
-              link.classList.add("active");
-            }
-          });
-
+    const sections = document.querySelectorAll("main section[id], .hero");
+    const links = document.querySelectorAll(".sidebar a");
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        links.forEach(link => {
+          link.classList.remove("active");
+          if (link.getAttribute("href") === "#" + entry.target.id) {
+            link.classList.add("active");
+          }
         });
-      },
-      {
-        rootMargin: "-20% 0px -70% 0px"
-      }
-    );
+      });
+    }, {
+      rootMargin: "-20% 0px -70% 0px"
+    });
 
     sections.forEach(section => {
       if (section.id) {
@@ -1734,6 +986,5 @@ Devfolio · Documentation · MIT License
       }
     });
   </script>
-
 </body>
 </html>
